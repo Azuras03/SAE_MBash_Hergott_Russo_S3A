@@ -12,6 +12,8 @@ char path[MAXLI];
 int pathidx;
 void mbash();
 int main(int argc, char** argv) {
+  printf("-- Welcome to MBash ! --\n");
+  getcwd(path, MAXLI);
   while (1) {
     printf("%s : ", path);
     fgets(cmd, MAXLI, stdin);
@@ -38,7 +40,7 @@ void mbash() {
         getcwd(path, MAXLI);
         pathidx = strlen(path);
     } else if (strcmp(args[0], "exit") == 0) {
-        printf("By ! Hav a niec dai\n Bash is not gud ahaha eeeeeeeeeeeee\n");
+        printf("By ! Hav a niec dai ahaha eeeeeeeeeeeee\n\n");
         exit(0);
     } else {
         int pid = fork();

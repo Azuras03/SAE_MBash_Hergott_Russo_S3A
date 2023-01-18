@@ -11,6 +11,7 @@ char cmd[MAXLI];
 char path[MAXLI];
 int pathidx;
 void mbash();
+
 int main(int argc, char** argv) {
   printf("-- Welcome to MBash ! --\n");
   getcwd(path, MAXLI);
@@ -18,6 +19,7 @@ int main(int argc, char** argv) {
     printf("%s : ", path);
     fgets(cmd, MAXLI, stdin);
     mbash(cmd);
+
   }
   return 0;
 }
@@ -46,7 +48,7 @@ void mbash() {
         int pid = fork();
         if (pid == 0) {
         execvp(args[0], args);
-        printf("No such command\n");
+        printf("Pas de commande existante\n");
         exit(0);
         } else {
         wait(NULL);

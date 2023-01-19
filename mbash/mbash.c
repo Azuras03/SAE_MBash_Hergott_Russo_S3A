@@ -48,6 +48,7 @@ void mbash() {
         tacheFond = 1;
         args[i-1] = NULL;
     }
+
     //Mise en place de la commande cd
     if (strcmp(args[0], "cd") == 0) {
         if (chdir(args[1]) == -1) {

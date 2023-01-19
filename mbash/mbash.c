@@ -6,9 +6,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+
 #define MAXLI 2048
 char cmd[MAXLI];
 char path[MAXLI];
+char history[MAXLI][MAXLI];
 int pathidx;
 void mbash();
 
@@ -34,7 +36,7 @@ void mbash() {
         token = strtok(NULL, " \n");
         i++;
     }
-    args[i] = NULL;
+    str
     if (strcmp(args[0], "cd") == 0) {
         if (chdir(args[1]) == -1) {
         printf("Répertoire inexistant ❄\n");
@@ -44,12 +46,19 @@ void mbash() {
     } else if (strcmp(args[0], "exit") == 0) {
         printf("By ! Hav a niec dai ahaha eeeeeeeeeeeee\n\n");
         exit(0);
+    } else if (strcmp(args[0], "history") == 0) {
+        for (int j = 0; j < i; j++) {
+            printf("%s\n", history[j]);
+        }
     } else {
         int pid = fork();
         if (pid == 0) {
-        execvp(args[0], args);
-        printf("Pas de commande existante\n");
-        exit(0);
+        if(args[0][0] == '.' && args[0][1] == '/') {
+            args[0] = args[0] + 2;
+        }
+            execvp(args[0], args);
+            printf("Commande inconnue ❄\n");
+            exit(0);
         } else {
         wait(NULL);
         }

@@ -2,7 +2,7 @@ Package: mbash
 Version: 0.1.0
 Section: development
 Priority: optional
-Architecture: all
+Architecture: amd64
 Depends: libc6
 Maintainer: nr03nrusso@gmail.com
 Description: A program for a MicroBash hehe

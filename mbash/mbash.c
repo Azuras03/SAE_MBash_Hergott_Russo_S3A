@@ -11,7 +11,6 @@
 char cmd[MAXLI];
 char path[MAXLI];
 char history[MAXLI][MAXLI];
-int pathidx;
 int count;
 void mbash();
 
@@ -40,30 +39,41 @@ void mbash() {
     }
     args[i] = NULL;
 
-    //add the current command to history
+    //ajout de la commande dans l'historique
     strcpy(history[count], cmd);
 
+    //vérification du &
+    int tacheFond = 0;
+    if (strcmp(args[i-1], "&") == 0) {
+        tacheFond = 1;
+        args[i-1] = NULL;
+    }
+    //Mise en place de la commande cd
     if (strcmp(args[0], "cd") == 0) {
         if (chdir(args[1]) == -1) {
         printf("Répertoire inexistant ❄\n");
         }
         getcwd(path, MAXLI);
-        pathidx = strlen(path);
     } else if (strcmp(args[0], "exit") == 0) {
+    //comportement de la commande exit
         printf("Bye ! Have a great day ! :D\n\n");
         exit(0);
     } else if (strcmp(args[0], "history") == 0) {
+    //comportement de la commande history
         for (int j = 0; j < count; j++) {
             printf("%s\n", history[j]);
         }
     } else {
+    //comportement des commandes directement exécutables par la méthode execvp
         int pid = fork();
         if (pid == 0) {
             execvp(args[0], args);
             printf("Commande inconnue ❄\n");
             exit(0);
         } else {
-        wait(NULL);
+            if (tacheFond == 0) {
+                wait(NULL);
+            }
         }
     }
 }

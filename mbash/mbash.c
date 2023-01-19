@@ -12,16 +12,18 @@ char cmd[MAXLI];
 char path[MAXLI];
 char history[MAXLI][MAXLI];
 int pathidx;
+int count;
 void mbash();
 
 int main(int argc, char** argv) {
   printf("-- Welcome to MBash ! --\n");
+  count = 0;
   getcwd(path, MAXLI);
   while (1) {
     printf("%s : ", path);
     fgets(cmd, MAXLI, stdin);
     mbash(cmd);
-
+    count++;
   }
   return 0;
 }
@@ -36,7 +38,11 @@ void mbash() {
         token = strtok(NULL, " \n");
         i++;
     }
-    str
+    args[i] = NULL;
+
+    //add the current command to history
+    strcpy(history[count], cmd);
+
     if (strcmp(args[0], "cd") == 0) {
         if (chdir(args[1]) == -1) {
         printf("Répertoire inexistant ❄\n");
@@ -47,15 +53,12 @@ void mbash() {
         printf("Bye ! Have a great day ! :D\n\n");
         exit(0);
     } else if (strcmp(args[0], "history") == 0) {
-        for (int j = 0; j < i; j++) {
+        for (int j = 0; j < count; j++) {
             printf("%s\n", history[j]);
         }
     } else {
         int pid = fork();
         if (pid == 0) {
-        if(args[0][0] == '.' && args[0][1] == '/') {
-            args[0] = args[0] + 2;
-        }
             execvp(args[0], args);
             printf("Commande inconnue ❄\n");
             exit(0);

@@ -44,7 +44,7 @@ void mbash() {
         getcwd(path, MAXLI);
         pathidx = strlen(path);
     } else if (strcmp(args[0], "exit") == 0) {
-        printf("By ! Hav a niec dai ahaha eeeeeeeeeeeee\n\n");
+        printf("Bye ! Have a great day ! :D\n\n");
         exit(0);
     } else if (strcmp(args[0], "history") == 0) {
         for (int j = 0; j < i; j++) {

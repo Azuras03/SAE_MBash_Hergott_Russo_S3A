@@ -5,4 +5,4 @@ Priority: optional
 Architecture: amd64
 Depends: libc6
 Maintainer: nr03nrusso@gmail.com
-Description: A program for a MicroBash hehe
+Description: A program for a MicroBash (made by Nicolas Russo and Emilien Hergott)

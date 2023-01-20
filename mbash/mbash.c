@@ -71,7 +71,7 @@ void mbash() {
             char execvFirstArg[100];
             strcpy(execvFirstArg, "/bin/");
             strcat(execvFirstArg, args[0]);
-            execve(execvFirstArg, args, NULL);
+            execv(execvFirstArg, args);
             printf("Commande inconnue ❄\n");
             exit(0);
         } else {

@@ -68,7 +68,10 @@ void mbash() {
     //comportement des commandes directement exécutables par la méthode execvp
         int pid = fork();
         if (pid == 0) {
-            execvp(args[0], args);
+            char execvFirstArg[100];
+            strcpy(execvFirstArg, "/bin/");
+            strcat(execvFirstArg, args[0]);
+            execve(execvFirstArg, args, NULL);
             printf("Commande inconnue ❄\n");
             exit(0);
         } else {
